@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+ <meta charset="UTF-8">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ <title>Receitas Caseiras para Pele</title>
+ <link rel="shortcut icon" href="icon.png" type="image/png">
+ <script>
+  document.addEventListener('DOMContentLoaded', function(){
+    document.querySelector('.processar').style.display = 'none'
+  })
+ </script>
+ <style>
+  .modal__container{
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 90;
+    display: none;
+    gap: 30px;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #000000;
+  }
+  .modal{
+    width: 300px;
+    height: 380px;
+    border-radius: 10px;
+    background-color: beige;
+    color: black;
+    padding: 10px;
+  }
+  .modal video{
+    width: 100%;
+    height: 300px;
+  }
+  .processar{
+    height: 100%;
+    width: 100%;
+    background-color: #000000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    z-index: 99;
+  }
+  .processar div{
+    height: 90px;
+    width: 90px;
+    background-color: #242424;
+    border: 2px solid rgb(0, 255, 4);
+    border-radius: 50%;
+    border-top: 2px solid transparent;
+    animation: processar 1.5s linear infinite;
+  }
+  @keyframes processar {
+    0%{
+      transform: rotate(360deg);
+    }
+    100%{
+      transform: rotate(0deg);
+    }
+  }
+  *{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+   font-family: Arial, Helvetica, sans-serif;
+  }
+  body{
+   background-color: black;
+   color: white;
+
+  }
+  header{
+   text-align: center;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   flex-direction: column;
+   gap: 30px;
+   width: 100%;
+   padding: 10px;
+  }
+  button{
+   height: 40px;
+   padding: 8px;
+   border: none;
+   font-weight: bolder;
+   border-radius: 8px;
+   background-color: rgb(79, 213, 81);
+   transition: all .4s;
+   cursor: pointer;
+   position: relative;
+    
+  }
+  .btn{
+   animation: flutuar 1s linear infinite alternate;
+  }
+  .btn2{
+   animation: pulse 1s linear infinite;
+  }
+  button:hover, button:focus{
+   background-color: rgb(0, 255, 4);
+  }
+  @keyframes pulse {
+    
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 255, 4, 0.536);
+  }
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(0, 255, 4, 0);
+  }
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 255, 4, 0);
+  }
+}
+  @keyframes flutuar{
+    0%{
+        top: 0;
+    }
+    100%{
+        top: 15px;
+    }
+  }
+  video{
+   width: 100%;
+   height: 100%;
+  }
+  ::-webkit-scrollbar{
+    width: 5px;
+}
+::-webkit-scrollbar-thumb{
+    border-radius: 20px;
+    background-color:  rgb(0, 255, 4);
+}
+.conteudo{
+ width: 100%;
+ padding: 10px;
+ text-align: center;
+}
+main{
+ width: 100%;
+}
+.firstConteudo{
+ display: grid;
+ grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+.esquerda{
+ position: relative;
+ height: 350px;
+ border-radius: 15px;
+ background: url('./foto.png');
+background-size: cover;
+background-position: center;
+}
+.controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.control-icon {
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    fill: rgb(79, 213, 81);
+    position: absolute;
+    padding: 10px;
+    background-color: aliceblue;
+    top: 50%;
+    border-radius: 50%;
+}
+
+.hidden {
+    display: none;
+}
+.video{
+ position: relative;
+ width: 100%;
+ height: 300px;
+}
+.direita{
+display: flex;
+flex-direction: column;
+gap: 20px;
+ align-items: center;
+ justify-content: center;
+}
+.direita div{
+ display: flex;
+ gap: 20px;
+ align-items: center;
+ justify-content: center;
+ overflow: hidden;
+}
+.direita div img{
+ width: 40%;
+}
+p{
+ font-size: 10px;
+}
+h1{
+ font-size: 18px;
+ text-align: center;
+}
+h2{
+ font-size: 15px;
+}
+h3{
+ font-size: 13px;
+}
+.porque{
+  padding: 10px;
+  width: 100%;
+}
+.sobre{
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.sobre{
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.vantagens{
+   height: 100%;
+   width: 100%;
+   padding: 10px;
+   display: flex;
+   flex-direction: column;
+   gap: 10px;
+   align-items: center;
+   justify-content: center;
+}
+.imgs{
+  display: flex;
+  gap: 10px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+.imgs img{
+  width: 100px;
+}
+.divs{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  height: 100%;
+  gap:10px;
+}
+.divs div p{
+  text-align: center;
+}
+.span{
+  text-align: center;
+  padding: 10px;
+  border-radius: 8px;
+  background: linear-gradient(to right, rgb(249, 225, 91), gold);
+  color: black;
+}
+.formulario{
+  padding: 10px;
+}
+.venda{
+  padding: 10px;
+  width: 130px;
+  background: linear-gradient(rgba(20, 199, 20, 0.438),rgba(20, 199, 20, 0.259)), url("./aloe-vera-png-isolated-transparent-background_191095-10202_035036-removebg-preview.png");
+  border-radius: 10px;
+  background-size: cover;
+}
+.countdown {
+            text-align: center;
+            background: transparent;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(202, 199, 199, 0.1);
+            transition: box-shadow 0.3s;
+            width: 250px;
+            font-size: 1em;
+            color: rgb(255, 255, 255);
+        }
+        .time {
+          color: rgb(255, 255, 255);
+            font-size: 1em;
+            padding: 10px;
+            width: 100%;
+            border-radius: 10px;
+            background: transparent;
+            border: 3px solid beige;
+            font-weight: bold;
+            margin: 10px 0;
+        }
+        .pulsing {
+            animation: pulso 1s infinite;
+        }
+        @keyframes pulso {
+            0% {
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 20px rgba(255, 0, 0, 0.8);
+            }
+            100% {
+                box-shadow: 0 0 10px rgba(255, 0, 0, 0.2);
+            }
+        }
+        .accordion {
+  max-width: 600px;
+  margin: 0 auto;
+  color: black;
+}
+
+.accordion-item {
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+}
+
+.accordion-header {
+  padding: 1rem;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.accordion-content {
+  padding: 0 10px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.accordion-item--active .accordion-header {
+  background-color: #ddd;
+}
+
+.accordion-item--active .accordion-content {
+  max-height: 1000px;
+  transition: max-height 0.5s ease-in-out;
+}
+
+/* esconde o conteúdo dos itens fechados */
+.accordion-item--closed .accordion-content {
+  max-height: 0;
+  overflow: hidden;
+}
+
+/* adiciona transição suave para abrir e fechar itens */
+.accordion-content {
+  transition: max-height 0.3s ease-out;
+}
+.perguntasFrequentes{
+  padding: 10px;
+}
+.beneficios{
+  padding: 10px;
+}
+ </style>
+</head>
+<body>
+  <div class="modal__container" id="modal-container">
+    <p style="position: absolute; top: 70px; z-index: 99; background-color: red; padding: 10px; right: 0; border-bottom-left-radius: 8px;" onclick="closeModal()">x</p>
+    <h2 style="text-align: center;">Como Fazer o Pagamento e Acessar o Produto</h2>
+    <div class="modal">
+      <p style="font-weight: bold; font-size: 14px; text-align: center;">Assista o vídeo abaixo</p>
+    <video src="./InShot_20240804_132636165.mp4" controls id="initial"></video>
+    <br>
+     <div style="display: flex; align-items: center; justify-content: center; width: 100%;">
+      <a href="javascript:void()"><button class="btn2" onclick="comprar()">COMPRAR AGORA</button></a>
+     </div>
+    
+    </div>
+</div>
+  <div class="processar">
+    <img src="icons8-cuidados-com-a-pele-96.png" width="60px" style="position: absolute; top: 45%; z-index: 99;">
+
+    <div class="principal">
+    </div>
+  </div>
+  <nav style="z-index: 95;width: 100%; display: flex; align-items: center; height: 70px; background-color: #242424; box-shadow: 5px 0px 10px #000000; position: fixed; top: 0;left: 0;">
+    <img src="icons8-cuidados-com-a-pele-96.png" width="60px"><h2>Receitas Caseiras para Pele</h2>
+  </nav>
+  <div class="espaco" style="height: 70px;"></div>
+ <header>
+  <h1>Transforme sua Pele em Apenas 7 Dias</h1>
+  <h4 style="text-transform: uppercase;">Assista o video abaixo!</h4>
+  <div class="video">
+   <video poster="foto.png">
+    <source src="./video.mp4">
+   </video>
+   <div class="controls">
+     <svg id="play" class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+         <path d="M8 5v14l11-7z"></path>
+     </svg>
+     <svg id="pause" class="control-icon hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+         <path d="M6 19h4V5H6zm8-14v14h4V5z"></path>
+     </svg>
+    </div>
+  </div>
+  
+  <h3>Elimine Acne e Manchas com <span style="color: rgb(79, 213, 81);">12 Receitas Naturais </span> Simples e Eficazes em 7 Dias</h3>
+  <button class="btn2" onclick="modal()">ADQUIRIR AGORA</button>
+ </header>
+  <div class="conteudo">
+    <h3>TESTADO E APROVADO</h3>
+    <br>
+    <p>Bem-vindo ao nosso site dedicado a ajudar você a alcançar uma pele perfeita de forma natural e eficaz. Sabemos que lidar com <strong>Acne</strong> e <strong>Manchas</strong> pode ser frustrante, mas estamos aqui para fornecer a você as informações, receitas e apoios necessários para ter sucesso. Nossa abordagem se baseia em tratamentos caseiros utilizando ingredientes simples e acessíveis, que proporcionam resultados rápidos e duradouros.</p>
+    <br>
+    <p>Com nosso e-book <q><strong>Tratamentos Caseiros Para Uma Pele Perfeita</strong></q> você descobrirá 12 receitas naturais que eliminam Acne e Manchas em apenas 7 dias. Acreditamos que cada pessoa é única, por isso nossas receitas são fáceis de seguir e adaptáveis às suas necessidades específicas. Junte-se a nós em sua jornada para uma pele mais saudável e radiante, e começa a ver resultados surpreendentes hoje mesmo!</p>
+    <br>
+    <p>Você terá o meu acompanhamento durante este período para aplicação de técnicas e receitas que vão acelerar os seus resultados. Dependedo da sua pele, você poderá notar uma transformação significativa, eliminando Acne e Manchas rapidamente.</p>
+  </div>
+  <br>
+  <main>
+   <div class="first">
+    <h2 style="text-align: center; text-transform: uppercase;">O que dizem sobre o nosso produto</h2>
+    <br>
+    <div class="firstConteudo">
+     <div class="esquerda btn">
+
+     </div>
+     <div class="direita">
+      <div>
+       <img src="./1.png"  style="box-shadow: 0px 0px 10px rgb(255, 255, 255);">
+       <img src="./2.png"  style="box-shadow: 0px 0px 10px rgb(255, 255, 255);">
+      </div>
+      <div>
+       <img src="./3.png" style="box-shadow: 0px 0px 10px rgb(255, 255, 255);">
+       <img src="./4.png" style="box-shadow: 0px 0px 10px rgb(255, 255, 255);">
+      </div>
+      
+      <img src="./5.png" width="200px" style="box-shadow: 0px 0px 10px rgb(23, 170, 43);">
+     </div>
+    </div>
+   
+   </div>
+   <br><br>
+   <div class="porque">
+    <h1>POR QUE ESCOLHER <q>TRATAMENTOS CASEIROS DE UMA PELE PERFEITA</q>?</h1>
+    <br>
+    <ol type="1" style="padding: 20px;">
+      <li>Resultados em apenas 7 dias</li>
+      <li>Receitas 100% naturais</li>
+      <li>Fácil de seguir</li>
+      <li>Economize dinheiro com tratamentos caseiros</li>
+      <li>Ingredientes simples e acessíveis</li>
+    </ol>
+    <img src="./acne-pele-negra.jpg" style="width: 100%; border-radius: 10px;">
+   </div>
+   <div class="sobre">
+    <h1>SOBRE O NOSSO PRODUTO</h1>
+    <br>
+    <p style="text-align: justify;"><strong>Tratamentos Caseiros de uma Pele Perfeita</strong> é um e-book inovador e prático, especialmente desenvolvido para ajudar você a conquistar uma pele saudável, radiante e sem imperfeições. Com 12 receitas naturais, este guia oferece soluções eficazes e seguras para eliminar <strong>Acne</strong> e <strong>Manchas</strong> em apenas 7 dias, utilizando ingredientes simples que você já tem em casa. Nossa abordagem é baseada em tratamentos caseiros comprovados, proporcionando resultados rápidos e duradouros sem a necessidade de produtos caros ou químicos agressivos.</p><br>
+    <button class="btn2" onclick="modal()">ADQUIRIR AGORA</button>
+   </div>
+   <div class="vantagens">
+    <h1>TRÊS VANTAGENS PARA ADQUIRIR O NOSSO E-BOOK</h1>
+    <br>
+    <p style="text-align: center;">Sabemos que lidar espinhas, acne e manchas pele pode ser desafiador, mas estamos aqui para lhe passar a informação certa para o vencer!</p>
+    <div class="imgs">
+      <img src="./premio1.png" alt="">
+      <img src="./premio.png" alt="">
+      <img src="./premio1.png" alt="">
+    </div>
+    <p>Facilidade de uso:</p>
+    <p>O <q><strong>Tratamentos Caseiros de uma Pele Perfeita</strong></q> oferece receitas simples e práticas, com instruções claras e fáceis de seguir. Mesmo quem não tem experiência com tratamento de pele pode facilmente aplicar as receitas e obter resultados impreensionantes</p>
+    <p>Versatilidade e Adaptabilidade:</p>
+    <p>As receitas podem ser adaptadas para diferentes tipos de pele e necessidades específicas. Isso significa que você pode personalizar os tratamentos para maximizar os benefícios para a sua pele, tornando o e-book uma ferramenta versátil e útil para todos.</p>
+    <p>Apoio e Acompanhamento:</p>
+    <p>Ao adquirir o e-book você não estará sozinho(a) na sua jornada para uma pele perfeita. Oferecemos suporte contínuo e acompanhamento, garantindo que você tenha todas as orientações necessárias para aplicar as receitas correctamente e obter os melhores resultados possíveis</p>
+
+   </div>
+   <div class="beneficios">
+    <h1>Benefícios do nosso e-book</h1>
+    <br>
+    <p style="text-align: center;"> Descubra como as receitas naturais
+       podem transformar sua pele em apenas 7 dias. Ingredientes acessíveis, instruções 
+       fáceis de seguir e suporte dedicado a você para garantir o seu objectivo de alcançar
+        uma pele saudével e radiante rapidamente.</p>
+        <br>
+    <div class="imgs">
+      <img src="acne-pele-negra.jpg" alt="">
+      <img src="aloe-vera-png-isolated-transparent-background_191095-10202_035036-removebg-preview.png">
+      <img src="skincare-cuidados-rotina-produtos-cosmeticos-vitamina-c-pele-negra-pele-ressecada-cuidados-pele-steal-the-look-20210910195007_035023.jpg" alt="">
+    </div>
+    <div class="divs">
+      <div>
+        <p><strong>RESULTADOS EM 7 DIAS</strong></p>
+        <p style="text-align: justify;">As receitas do nosso são formuladas para proporcionar resultados rápidos e eficazes. Você começará a ver melhorias significativas em sua pele, com a redução de Acne e Manchas em apenas uma semana de uso.</p>
+      </div>
+      <div>
+        <p><strong>INGREDIENTES NATURAIS E ACESSÍVEIS</strong></p>
+        <p style="text-align: justify;">Todas a receitas utilizam ingredientes naturais e fáceis de encontar que são seguros para a pele. Você não precisará gastar dinheiro com produtos caros ou se preocupar com efeitos colaterais de químicos agressivos.</p>
+      </div>
+      <div>
+        <p><strong>FÁCIL DE SEGUIR E PERSONALIZAR</strong></p>
+        <p style="text-align: justify;">O e-book é fácil de seguir, com instruções claras e detalhadas para cada receita. Além disso, as receitas podem ser personalizadas de acordo com as suas necessidades específicas e tipo de pele, garantindo uma abordagem personalizada e eficaz.</p>
+      </div>
+    </div>
+   </div>
+   <div class="promocao">
+    <h1>PROMOÇÃO</h1>
+    <br>
+    <p style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; text-align: center;">TRATAMENTO CASEIRO DE UMA PELE PERFEITA</p>
+    <br>
+    <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center;">
+      <span class="span" style="text-align: center;">Por apenas 3.000,00kz<sup style="color: red;">*</sup></span>
+    </div>
+    <br>
+
+   </div>
+   <div class="porque">
+    <h1>PORQUE VOCÊ DEVERIA COMPRAR?</h1>
+    <br>
+    <p>Transformar a pele e sua confiança com o poder das receitas caseiras e naturais. Comece hoje mesmo e veja a mudança que você merece.</p>
+    <br>
+    <h3 style="text-align: center;">Transforme sua pele de forma natural e segura:</h3>
+    <p>Com o <q>Tratamento Caseiro de Uma Pele Perfeita</q>, você poderá transformar sua pele utilizando apenas ingredientes naturais.</p>
+    <br>
+    <h3 style="text-align: center;">Economize dinheiro com soluções caseiras:</h3>
+    <p>As receitas do e-book utilizam ingredientes simples e acessíveis que você provavelmente ja tem em casa. Isso significa que você pode economizar dinheiro enquanto cuida da sua pele de forma</p>
+<br>
+    <div style="height: 100%; width: 100%; display: flex; align-items: center;
+     justify-content: center;">
+      <button class="btn2"  onclick="modal()">ADQUIRIR AGORA</button>
+    </div>
+   </div>
+   <div style="width: 100%; display: flex; gap: 10px;">
+   <div class="formulario">
+    <div class="venda">
+      <h3 style="text-align: center;">Transforme sua pele</h3>
+      <p style="text-align: center;">Mais de 10 receitas poderosas para uma pele perfeita</p>
+      <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; margin-top: 10px;">
+        <p><strong>Antes</strong>: <small style="font-size: 10px;color: rgb(238, 10, 10);">9.000,00kz</small></p>
+        <p style=" margin-bottom: 10px;"><strong>Agora</strong>: 3.000,00kz</p>
+        
+      </div>
+      <div style="height: 100%; width: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 10px;">
+      <button class="btn2" style="font-size: 9px; padding: 5px; height: 30px;" onclick="modal()">ADQUIRIR AGORA</button>
+      </div>
+      <br>
+      <div style="display: flex; gap: 10px;">
+        <div class="imgs">
+          <img src="./transferir (1).png" style="width: 30px;">
+          
+          <img src="./transferir (5).jpeg" style="width: 30px;">
+  
+          <img src="./transferir.png" style="background-color: white; width: 30px;">
+        </div>
+        
+      </div>
+    </div>
+    
+   </div>
+   <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+    <img src="foto.png" style="width: 100%;">
+  </div>
+</div>
+<div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+  <div class="countdown">
+    <h1>Promoção Termina Em:</h1>
+    <div id="time" class="time"></div>
+  </div>
+
+</div>
+  <div class="perguntasFrequentes">
+    <br>
+    <h1>Perguntas Frequentes</h1>
+    <br>
+    <p style="text-align: center;">Encontre respostas para as perguntas mais comuns sobre o nosso ebook <q>Tratamentos Caseiros de Uma Pele ​Perfeita</q>  e o processo de compra na plataforma angolana Kuenha.</p>
+    <br>
+    <div class="accordion">
+      <div class="accordion-item accordion-item--closed">
+        <div class="accordion-header">O que é o Ebook <q>Tratamentos Caseiros de Uma Pele ​Perfeita</q>?</div>
+        <div class="accordion-content">
+          <p>
+            O ebook é um guia prático com 12 receitas 
+            naturais ​que ajudam a eliminar acne e manchas,
+            ​proporcionando uma pele 
+            saudável e radiante em ​apenas 7 dias.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item accordion-item--closed">
+        <div class="accordion-header">Como Fazer o Pagamento e Acessar o Produto após a Compra?</div>
+        <div class="accordion-content">
+          <br>
+          <p>
+            Você pode adquirir o ebook diretamente através da ​plataforma Kuenha. Basta seguir as instruções de ​compra e pagamento na página do produto.
+          </p>
+          <p style="text-align: center; font-weight: bold;">Assista o vídeo abaixo para mais detalhes.</p>
+          <video src="./InShot_20240804_132636165.mp4" controls style="width: 100%; height: 300px;"></video>
+        </div>
+      </div>
+      <div class="accordion-item accordion-item--closed">
+        <div class="accordion-header">Em Quanto Tempo Receberei o Ebook Após a Compra?</div>
+        <div class="accordion-content">
+          <p>
+            Após a confirmação do pagamento na Kuenha, você ​receberá o ebook imediatamente por e-mail. ​Certifique-se de verificar sua caixa de entrada do seu email.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item accordion-item--closed">
+        <div class="accordion-header">O Ebook está Disponível em Formato Físico?</div>
+        <div class="accordion-content">
+          <p>
+            Atualmente, o ebook está disponível apenas em ​formato digital. Isso permite que você tenha acesso ​imediato após a compra e possa ler em qualquer ​dispositivo.
+          </p>
+        </div>
+      </div>
+      <div class="accordion-item accordion-item--closed">
+        <div class="accordion-header">Como Posso Contatar o Suporte ao Cliente?</div>
+        <div class="accordion-content">
+
+          <p>
+            Para qualquer dúvida 
+            ou assistência, você 
+            pode entrar ​em contato 
+            conosco.
+          </p>
+          <br>
+          <p style="font-weight: bold; text-align: center;">CLICA NO BOTÃO ABAIXO</p>
+          <div style="width: 100%; display: flex; align-items: center; justify-content: center;">
+            <a href="https://wa.me/244932778094"><button class="btn2">SUPORTE AO CLIENTE</button></a>
+          </div>
+          <br>
+        </div>
+      </div>
+    </div>
+  </div>
+  </main>
+  <footer style="width: 100%; display: flex; align-items: center; justify-content: center; background-color: #655f5f; height: 20px;">
+    <p>
+      &copy;2024 Tratamentos Caseiros de Uma Pele Perfeita. Todos os direitos reservados
+    </p>
+  </footer>
+  <script>
+    function startCountdown(targetDate) {
+    function updateCountdown() {
+        let now = new Date().getTime();
+        let distance = targetDate - now;
+
+        if (distance < 0) {
+            targetDate = new Date().getTime() + 3 * 24 * 60 * 60 * 1000; // Adiciona 3 dias
+            distance = targetDate - now;
+        }
+
+        let days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        let hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        let seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById('time').innerHTML = 
+            days + "d " + hours + ":" + minutes + ":" + seconds;
+
+        // Adiciona a classe de pulso se faltarem menos de 2 horas
+        let countdownElement = document.querySelector('.countdown');
+        if (distance < 2 * 60 * 60 * 1000) { // Menos de 2 horas
+            countdownElement.classList.add('pulsing');
+        } else {
+            countdownElement.classList.remove('pulsing');
+        }
+
+        setTimeout(updateCountdown, 1000);
+    }
+
+    updateCountdown();
+}
+
+// Data específica: 2024-08-05
+const targetDate = new Date('2024-08-04T17:59:00').getTime();
+startCountdown(targetDate);
+document.addEventListener('DOMContentLoaded', () => {
+    const playButton = document.getElementById('play');
+    const pauseButton = document.getElementById('pause');
+    const video = document.querySelector('video')
+    playButton.addEventListener('click', () => {
+        playButton.classList.add('hidden');
+        video.play()
+        pauseButton.classList.remove('hidden');
+    });
+
+    pauseButton.addEventListener('click', () => {
+        pauseButton.classList.add('hidden');
+        video.pause()
+        playButton.classList.remove('hidden');
+    });
+});
+// obtém todos os elementos com classe accordion-header
+const headers = document.querySelectorAll(".accordion-header");
+
+// adiciona o listener de clique em cada header
+headers.forEach(function (header) {
+  header.addEventListener("click", function () {
+    // obtém o elemento accordion-item correspondente
+    const item = this.parentNode;
+    // obtém todos os elementos accordion-item
+    const items = document.querySelectorAll(".accordion-item");
+    // verifica se o item clicado já está ativo
+    const isActive = item.classList.contains("accordion-item--active");
+    // fecha todos os itens
+    items.forEach(function (item) {
+      item.classList.remove("accordion-item--active");
+      item.classList.add("accordion-item--closed");
+    });
+    // se o item clicado não estava ativo, abra-o
+    if (!isActive) {
+      item.classList.add("accordion-item--active");
+      item.classList.remove("accordion-item--closed");
+    }
+  });
+});
+function modal(){
+    let modalContainer = document.getElementById("modal-container")
+    modalContainer.style.display = "flex";
+    document.getElementById('initial').play()
+}
+function closeModal(){
+    let modalContainer = document.getElementById("modal-container")
+    modalContainer.style.display = "none";
+    document.getElementById('initial').pause()
+}
+function comprar(){
+  window.location.href = "https://pay.kuenha.com/33b80506-a515-4bc5-bf73-23db78687a60"
+}
+  </script>
+</body>
+</html>
