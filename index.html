@@ -404,7 +404,7 @@ h3{
   <h4 style="text-transform: uppercase;">Assista o video abaixo!</h4>
   <div class="video">
    <video poster="foto.png">
-    <source src="http://claudiogustavo12-001-site1.etempurl.com/video.mp4">
+    <source src="https://www.receitas-caseiras-da-pele.x10.bz/video.mp4" class="myvideo" >
    </video>
    <div class="controls">
      <svg id="play" class="control-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
@@ -691,7 +691,7 @@ startCountdown(targetDate);
 document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('play');
     const pauseButton = document.getElementById('pause');
-    const video = document.querySelector('video')
+    const video = document.querySelector('.myvídeo')
     playButton.addEventListener('click', () => {
         playButton.classList.add('hidden');
         video.play()
