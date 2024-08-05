@@ -402,9 +402,9 @@ h3{
  <header>
   <h1>Transforme sua Pele em Apenas 7 Dias</h1>
   <h4 style="text-transform: uppercase;">Assista o video abaixo!</h4>
- <video src="./video.mp4" controls id="initial" poster="foto.png ></video>
+ <video src="./video.mp4" controls id="initial" poster="foto.png" ></video>
   <div class="video">
-   <video poster="foto.png" class="myvideo" controls>
+   <video poster="foto.png" id="myvideo" controls>
     <source src="./video.mp4"  >
    </video>
    <div class="controls">
@@ -689,11 +689,10 @@ h3{
 // Data específica: 2024-08-05
 const targetDate = new Date('2024-08-04T17:59:00').getTime();
 startCountdown(targetDate);
-   document.querySelector('.myvídeo').play();
 document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.getElementById('play');
     const pauseButton = document.getElementById('pause');
-    const video = document.querySelector('.myvídeo')
+    const video = document.getElementById('myvideo')
     playButton.addEventListener('click', () => {
         playButton.classList.add('hidden');
         video.play()
