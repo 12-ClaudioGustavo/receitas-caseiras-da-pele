@@ -6,7 +6,7 @@
  <title>Receitas Caseiras para Pele</title>
  <link rel="shortcut icon" href="icon.png" type="image/png">
  <script>
-  document.addEventListener('DOMContentLoaded', function(){
+  window.addEventListener('load',  function(){
     document.querySelector('.processar').style.display = 'none'
   })
  </script>
@@ -405,6 +405,66 @@ h3{
             transform: rotate(360deg);
         }
     }
+    .container {
+            max-width: 800px;
+            margin: auto;
+            background-color: #000000;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            color: white;
+        }
+        .container h1 {
+            color: #ff0026;
+            text-shadow: 0px 0px 8px red;
+            font-size: 30px;
+            text-align: center;
+        }
+        .container p {
+          font-size: 10px;
+            line-height: 1.6;
+            color: #ffffff;
+            margin-bottom: 20px;
+        }
+        .highlight {
+            color: #ff0000;
+            font-weight: bold;
+        }
+        .mask-list {
+            list-style-type: square;
+            padding-left: 20px;
+        }
+        .mask-list li {
+          font-size: 10px;
+            margin-bottom: 10px;
+        }
+        .bonus-button {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin-top: 20px;
+            text-align: center;
+            background-color: #e73c3c;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .bonus-button:hover {
+            background-color: #ff1a01;
+        }
+        .guarantee-section {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #242424;
+            border: 3px solid #d61515;
+            border-radius: 5px;
+        }
+        .guarantee-section p {
+            color: white;
+            font-size: 10px;
+        }
  </style>
 </head>
 <body>
@@ -570,6 +630,26 @@ h3{
     <br>
 
    </div>
+   <div class="container">
+        <h1>Bônus Exclusivo</h1>
+        <br>
+        <p>Ao adquirir o <span class="highlight">Tratamentos Caseiros para Pele Perfeita</span>, você receberá um bônus exclusivo que vai revolucionar sua rotina de cuidados com a pele.</p>
+        <p>Este bônus inclui:</p>
+        <ul class="mask-list">
+            <li><strong>10 Máscaras Faciais Poderosas:</strong> Rejuvenescimento e brilho instantâneo com receitas simples e eficazes.</li>
+            <li><strong>Combinações Incríveis:</strong> Como combinar diferentes máscaras para potencializar os resultados.</li>
+            <li><strong>Dicas de Aplicação:</strong> Orientações sobre como e quando usar as máscaras para obter o melhor resultado.</li>
+        </ul>
+        <p>Aproveite este bônus exclusivo para alcançar resultados ainda mais rápidos e duradouros!</p>
+        <a href="#" class="bonus-button">Garanta Meu Bônus Agora</a>
+        <br><br>
+        <h1>Garantia de Satisfação</h1>
+        <br>
+        <div class="guarantee-section">
+            
+            <p>Se você não estiver completamente satisfeito com os resultados, oferecemos uma <strong>garantia de 7 dias</strong> para reembolso total. Compre com confiança, sabendo que sua satisfação é nossa prioridade!</p>
+        </div>
+    </div>
    <div class="porque">
     <h1>PORQUE VOCÊ DEVERIA COMPRAR?</h1>
     <br>
@@ -695,6 +775,7 @@ h3{
       &copy;2024 Tratamentos Caseiros de Uma Pele Perfeita. Todos os direitos reservados
     </p>
   </footer>
+  <script src="suit.js"></script>
   <script>
     function startCountdown(targetDate) {
     function updateCountdown() {
@@ -800,6 +881,13 @@ headers.forEach(function (header) {
 function modal(){
     let modalContainer = document.getElementById("modal-container")
     modalContainer.style.display = "flex";
+    const videos = document.querySelectorAll('video')
+    videos.forEach(video=>{
+    video.pause()
+    document.getElementById('play').classList.remove('hidden');
+    document.getElementById('pause').classList.add('hidden');
+        
+    })
     document.getElementById('initial').play()
 }
 function closeModal(){
@@ -813,6 +901,28 @@ document.querySelector(".btnL").disabled = true
 document.querySelector(".btn-load").style.display = "block"
   window.location.href = "https://pay.kuenha.com/33b80506-a515-4bc5-bf73-23db78687a60"
 }
+document.querySelector('.bonus-button').addEventListener('click', function(e) {
+            e.preventDefault();
+
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: "top-end",
+                  showConfirmButton: false,
+                  timer: 4000,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                  }
+                });
+                Toast.fire({
+                  icon: "success",
+                  title: "Após a compra, o bônus será enviado diretamente ao seu WhatsApp!"
+                  })
+                  .then(function(){
+                    modal();
+                  })
+        });
   </script>
 </body>
 </html>
