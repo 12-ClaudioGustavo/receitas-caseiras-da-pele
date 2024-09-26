@@ -21,6 +21,16 @@
         header h1 {
             font-size: 3rem;
         }
+#countdown {
+            font-size: 1.5rem;
+            margin: 20px 0;
+        }
+
+        #minutes, #seconds {
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
         .btn-cta {
             background-color: #32CD32;
             color: white;
@@ -103,7 +113,26 @@
         <h2>Oferta Limitada!</h2>
         <p>Compre agora o e-book completo com 30% de desconto. Não perca essa oportunidade de cuidar da sua pele com receitas naturais!</p>
         <button class="btn-cta">Adquira com Desconto</button>
-        <div id="countdown" class="mt-3"></div>
+       <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 offset-md-3 text-center">
+                <img src="https://via.placeholder.com/300x450" alt="Desafio" class="img-fluid">
+                <h2 class="mt-3 text-success">OFERTA ESPECIAL</h2>
+                <h4 class="text-warning">Promoção encerra em poucos minutos</h4>
+                <div id="countdown" class="d-flex justify-content-center">
+                    <div class="p-2 text-white bg-dark rounded"> 
+                        <span id="minutes">07</span> Minutos
+                    </div>
+                    <div class="p-2 text-white bg-dark rounded mx-2">
+                        <span id="seconds">47</span> Segundos
+                    </div>
+                </div>
+                <h3 class="mt-3 text-white bg-success p-2 rounded">De 24700,99 por apenas</h3>
+                <h1 class="text-success display-3">6700 KZ</h1>
+                <button class="btn btn-lg btn-success mt-3">Comprar agora a fórmula</button>
+            </div>
+        </div>
+    </div>
     </div>
 </section>
 
@@ -112,35 +141,26 @@
 </footer>
 
 <script>
-    // Contador de tempo para oferta
-    const countdown = () => {
-        const countDate = new Date("Dec 31, 2024 23:59:59").getTime();
-        const now = new Date().getTime();
-        const gap = countDate - now;
+    regressiva (inicia de 7 minutos e 47 segundos)
+        let minutes = 7;
+        let seconds = 47;
 
-        const second = 1000;
-        const minute = second * 60;
-        const hour = minute * 60;
-        const day = hour * 24;
+        const countdown = setInterval(() => {
+            if (seconds === 0) {
+                if (minutes === 0) {
+                    clearInterval(countdown);
+                    document.getElementById('countdown').innerHTML = '<span class="text-danger">Tempo Esgotado!</span>';
+                } else {
+                    minutes--;
+                    seconds = 59;
+                }
+            } else {
+                seconds--;
+            }
 
-        const days = Math.floor(gap / day);
-        const hours = Math.floor((gap % day) / hour);
-        const minutes = Math.floor((gap % hour) / minute);
-        const seconds = Math.floor((gap % minute) / second);
-
-        document.getElementById("countdown").innerHTML = `
-            <div class="bg-dark text-light p-4 rounded">
-                <h4>${days}d ${hours}h ${minutes}m ${seconds}s</h4>
-                <p>Restam para aproveitar a oferta!</p>
-            </div>
-        `;
-
-        if (gap < 0) {
-            document.getElementById("countdown").innerHTML = "<h4>Oferta Expirada!</h4>";
-        }
-    };
-
-    setInterval(countdown, 1000);
+            document.getElementById('minutes').innerText = minutes.toString().padStart(2, '0');
+            document.getElementById('seconds').innerText = seconds.toString().padStart(2, '0');
+        }, 1000);
 </script>
 
 </body>
