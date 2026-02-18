@@ -1,227 +1,622 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Receitas Caseiras para a Pele</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #fdfdfd;
-            color: #333;
-        }
-        header {
-            
-            text-align: center;
-            padding: 50px 20px;
-            color: white;
-        }
-        header h1 {
-            font-size: 3rem;
-        }
-        #countdown {
-            font-size: 1.5rem;
-            margin: 20px 0;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pele Radiante — Receitas Naturais</title>
 
-        #minutes, #seconds {
-            font-size: 2rem;
-            font-weight: bold;
-        }
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet" />
 
-        .btn-cta {
-            background-color: #32CD32;
-            color: white;
-            padding: 15px 30px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.5rem;
-            cursor: pointer;
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Cormorant Garamond', 'serif'],
+            sans: ['DM Sans', 'sans-serif'],
+          },
+          colors: {
+            cream: '#FAF6F0',
+            sage: '#8FA888',
+            gold: '#C9A96E',
+            bark: '#5C3D2E',
+            ivory: '#F5EFE6',
+            moss: '#4A6741',
+          },
+          animation: {
+            fadeUp: 'fadeUp 0.9s ease forwards',
+            shimmer: 'shimmer 2s infinite',
+            pulse2: 'pulse2 2s infinite',
+          },
+          keyframes: {
+            fadeUp: {
+              '0%': { opacity: 0, transform: 'translateY(40px)' },
+              '100%': { opacity: 1, transform: 'translateY(0)' },
+            },
+            shimmer: {
+              '0%,100%': { opacity: 1 },
+              '50%': { opacity: 0.6 },
+            },
+            pulse2: {
+              '0%,100%': { transform: 'scale(1)', boxShadow: '0 0 0 0 rgba(201,169,110,0.4)' },
+              '50%': { transform: 'scale(1.03)', boxShadow: '0 0 0 12px rgba(201,169,110,0)' },
+            },
+          }
         }
-        .btn-cta:hover {
-            background-color: #228B22;
-        }
-        section {
-            padding: 50px 20px;
-        }
-        .benefits, .testimonials, .offer {
-            background-color: #f9f9f9;
-            padding: 30px;
-            margin-bottom: 30px;
-            border-radius: 15px;
-        }
-        .benefits ul {
-            list-style: none;
-            padding: 0;
-        }
-        .benefits ul li {
-            margin-bottom: 10px;
-            font-size: 1.2rem;
-        }
-        .benefits ul li i {
-            color: #32CD32;
-            margin-right: 10px;
-        }
-        .testimonials img {
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            margin-right: 20px;
-        }
-        footer {
-            text-align: center;
-            background-color: #333;
-            color: white;
-            padding: 20px 0;
-        }
-    </style>
+      }
+    }
+  </script>
+
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #FAF6F0; color: #2c2c2c; }
+
+    /* Grain overlay */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+      opacity: 0.35;
+    }
+
+    .font-serif { font-family: 'Cormorant Garamond', serif; }
+    .font-sans  { font-family: 'DM Sans', sans-serif; }
+
+    /* Hero */
+    .hero-bg {
+      background: linear-gradient(160deg, #2e1e14 0%, #4a2e1c 40%, #5c3d2e 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero-bg::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url('https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=1600&q=80') center/cover no-repeat;
+      opacity: 0.18;
+      mix-blend-mode: luminosity;
+    }
+
+    /* Floating badge */
+    .badge-float {
+      animation: float 4s ease-in-out infinite;
+    }
+    @keyframes float {
+      0%,100% { transform: translateY(0); }
+      50%      { transform: translateY(-10px); }
+    }
+
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    /* Testimonial card hover */
+    .tcard { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .tcard:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(92,61,46,0.15); }
+
+    /* CTA button */
+    .btn-gold {
+      background: linear-gradient(135deg, #C9A96E, #a8823e);
+      color: white;
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .btn-gold::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.15), transparent);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .btn-gold:hover::after { opacity: 1; }
+    .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(168,130,62,0.4); }
+
+    /* Divider leaf */
+    .leaf-divider { text-align: center; color: #8FA888; font-size: 1.5rem; margin: 0.5rem 0; }
+
+    /* Price cross */
+    .price-old { text-decoration: line-through; color: #aaa; }
+
+    /* Accordion */
+    .faq-content { max-height: 0; overflow: hidden; transition: max-height 0.5s ease, padding 0.3s; }
+    .faq-content.open { max-height: 300px; }
+    .faq-icon { transition: transform 0.3s ease; }
+    .faq-icon.open { transform: rotate(45deg); }
+
+    /* Timer */
+    .timer-box {
+      background: linear-gradient(135deg, #2e1e14, #4a2e1c);
+      border: 1px solid rgba(201,169,110,0.3);
+    }
+
+    /* Progress bar */
+    @keyframes progress { from { width: 0 } to { width: 73% } }
+    .progress-bar { animation: progress 2s ease forwards; }
+
+    /* Sticky header */
+    #sticky-nav { transform: translateY(-100%); transition: transform 0.4s ease; }
+    #sticky-nav.show { transform: translateY(0); }
+
+    /* Image card */
+    .img-card img { transition: transform 0.6s ease; }
+    .img-card:hover img { transform: scale(1.05); }
+  </style>
 </head>
-<body >
 
-<header class="bg-dark" >
-    <h1>Receitas Naturais para uma Pele Radiante</h1>
-    <p>Descubra como melhorar sua pele usando apenas ingredientes naturais. <br> E-book disponível por tempo limitado!</p>
-    <button class="btn-cta">Adquira Agora</button>
-</header>
+<body class="font-sans">
 
-<section class="container">
-    <div class="row benefits">
-        <h2>Benefícios das Receitas</h2>
-        <ul>
-            <li><i class="fas fa-check-circle"></i> Hidratação profunda para a pele</li>
-            <li><i class="fas fa-check-circle"></i> Redução de manchas e cicatrizes</li>
-            <li><i class="fas fa-check-circle"></i> Ingredientes naturais e sem químicos</li>
-            <li><i class="fas fa-check-circle"></i> Resultados visíveis em poucos dias</li>
-        </ul>
+  <!-- STICKY NAV -->
+  <nav id="sticky-nav" class="fixed top-0 left-0 right-0 z-50 bg-bark/95 backdrop-blur-sm shadow-lg">
+    <div class="max-w-6xl mx-auto px-6 py-3 flex items-center justify-between">
+      <span class="font-serif text-gold text-xl italic">Pele Radiante</span>
+      <button onclick="document.getElementById('oferta').scrollIntoView({behavior:'smooth'})"
+        class="btn-gold px-5 py-2 rounded-full text-xs">
+        Adquirir Agora — 6.700 KZ
+      </button>
+    </div>
+  </nav>
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero-bg min-h-screen flex items-center justify-center relative" style="z-index:1">
+    <div class="absolute inset-0 z-0" style="background:url('https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?w=1600&q=80') center/cover no-repeat; opacity:0.22;"></div>
+
+    <div class="relative z-10 text-center px-6 max-w-4xl mx-auto py-28">
+      <!-- Badge -->
+      <div class="badge-float inline-flex items-center gap-2 bg-gold/20 border border-gold/40 text-gold text-xs font-sans uppercase tracking-widest px-4 py-1.5 rounded-full mb-8">
+        <i class="fas fa-leaf"></i> E-book Exclusivo · Edição Limitada
+      </div>
+
+      <h1 class="font-serif text-5xl md:text-7xl text-white leading-tight mb-4">
+        Receitas Naturais<br/><em class="text-gold">para uma Pele Radiante</em>
+      </h1>
+
+      <p class="text-white/70 text-lg md:text-xl font-light max-w-2xl mx-auto mb-10 leading-relaxed">
+        Descubra o poder dos ingredientes da natureza para transformar sua pele — sem químicos, sem complicação. Resultados visíveis em menos de 7 dias.
+      </p>
+
+      <!-- Stars -->
+      <div class="flex justify-center gap-1 mb-3">
+        <i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i>
+      </div>
+      <p class="text-white/50 text-sm mb-10">+2.400 mulheres já transformaram sua pele</p>
+
+      <a href="#oferta">
+        <button class="btn-gold px-10 py-5 rounded-full text-sm shadow-2xl animate-pulse2">
+          <i class="fas fa-bolt mr-2"></i>Quero Minha Pele Radiante — 6.700 KZ
+        </button>
+      </a>
+
+      <p class="text-white/40 text-xs mt-4"><i class="fas fa-lock mr-1"></i>Compra segura · Acesso imediato</p>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/30 text-xs gap-2">
+        <span>Descobrir</span>
+        <i class="fas fa-chevron-down animate-bounce"></i>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       SOCIAL PROOF BAR
+  ═══════════════════════════════════════════ -->
+  <section class="bg-bark text-white py-4">
+    <div class="max-w-5xl mx-auto px-6 flex flex-wrap justify-center gap-8 text-center text-sm font-light">
+      <div class="flex items-center gap-2"><i class="fas fa-users text-gold"></i> +2.400 clientes satisfeitas</div>
+      <div class="flex items-center gap-2"><i class="fas fa-leaf text-gold"></i> 100% ingredientes naturais</div>
+      <div class="flex items-center gap-2"><i class="fas fa-shield-halved text-gold"></i> Garantia de satisfação</div>
+      <div class="flex items-center gap-2"><i class="fas fa-bolt text-gold"></i> Acesso imediato</div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       PROBLEMA → SOLUÇÃO
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 px-6 max-w-5xl mx-auto reveal">
+    <div class="text-center mb-16">
+      <p class="text-sage text-xs uppercase tracking-widest mb-3 font-sans">O problema</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-bark leading-tight">Cansada de gastar<br/><em>sem ver resultado?</em></h2>
     </div>
 
-    <div class="row testimonials">
-        <h2>Depoimentos de Clientes</h2>
-        <div class="d-flex align-items-center mb-4">
-            <img src="https://via.placeholder.com/80" alt="Cliente 1">
-            <p>"Eu nunca tinha visto minha pele tão saudável! As receitas são fáceis e eficazes!" - Maria L.</p>
+    <div class="grid md:grid-cols-3 gap-6 mb-16">
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-ivory text-center">
+        <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-times text-red-400 text-lg"></i>
         </div>
-        <div class="d-flex align-items-center">
-            <img src="https://via.placeholder.com/80" alt="Cliente 2">
-            <p>"Minha pele melhorou muito em apenas 1 semana. Recomendo a todas!" - Ana C.</p>
+        <h3 class="font-serif text-xl text-bark mb-2">Produtos caros</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Cosméticos importados que prometem tudo e entregam pouco, pesando no bolso.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-ivory text-center">
+        <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-flask text-red-400 text-lg"></i>
         </div>
+        <h3 class="font-serif text-xl text-bark mb-2">Químicos agressivos</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Fórmulas industriais que irritam, ressecam e a longo prazo causam mais danos.</p>
+      </div>
+      <div class="bg-white rounded-2xl p-6 shadow-sm border border-ivory text-center">
+        <div class="w-12 h-12 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-4">
+          <i class="fas fa-clock text-red-400 text-lg"></i>
+        </div>
+        <h3 class="font-serif text-xl text-bark mb-2">Resultados lentos</h3>
+        <p class="text-sm text-gray-500 leading-relaxed">Meses de uso sem notar qualquer diferença visível, perdendo motivação.</p>
+      </div>
     </div>
 
-    <div class="row offer">
-        <h2>Oferta Limitada!</h2>
-        <p>Compre agora o e-book completo com 30% de desconto. Não perca essa oportunidade de cuidar da sua pele com receitas naturais!</p>
-        <button class="btn-cta">Adquira com Desconto</button>
-        <div class="container mt-5">
-            <div class="row">
-                <div class="col-md-6 offset-md-3 text-center">
-                    <img src="https://via.placeholder.com/300x450" alt="Desafio" class="img-fluid">
-                    <h2 class="mt-3 text-success">OFERTA ESPECIAL</h2>
-                    <h4 class="text-warning">Promoção encerra em poucos minutos</h4>
-                    <div id="countdown" class="d-flex justify-content-center">
-                        <div class="p-2 text-white bg-dark rounded"> 
-                            <span id="minutes">07</span> Minutos
-                        </div>
-                        <div class="p-2 text-white bg-dark rounded mx-2">
-                            <span id="seconds">47</span> Segundos
-                        </div>
-                    </div>
-                    <h3 class="mt-3 text-white bg-success p-2 rounded">De 24700,99 por apenas</h3>
-                    <h1 class="text-success display-3">6700 KZ</h1>
-                    <button class="btn btn-lg btn-success mt-3">Comprar agora a fórmula</button>
-                </div>
+    <!-- Solução -->
+    <div class="bg-gradient-to-br from-moss/10 to-sage/10 rounded-3xl p-10 text-center border border-sage/20">
+      <i class="fas fa-seedling text-sage text-4xl mb-4"></i>
+      <h3 class="font-serif text-3xl text-bark mb-3">A natureza já tem a resposta</h3>
+      <p class="text-gray-600 max-w-xl mx-auto leading-relaxed">Ingredientes que a sua avó já conhecia, agora organizados em receitas simples, testadas e com resultados reais. Sem mistérios, sem gastos excessivos.</p>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       IMAGENS / O QUE ESTÁ INCLUÍDO
+  ═══════════════════════════════════════════ -->
+  <section class="py-20 bg-ivory overflow-hidden">
+    <div class="max-w-6xl mx-auto px-6">
+      <div class="text-center mb-14 reveal">
+        <p class="text-sage text-xs uppercase tracking-widest mb-3">O e-book</p>
+        <h2 class="font-serif text-4xl md:text-5xl text-bark">O que você vai receber</h2>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <div class="img-card rounded-2xl overflow-hidden shadow-md reveal group">
+          <div class="overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=600&q=80" alt="Hidratação" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-white p-5">
+            <div class="flex items-center gap-2 mb-2"><span class="text-xs bg-sage/20 text-moss px-2 py-0.5 rounded-full font-sans">Capítulo 1</span></div>
+            <h3 class="font-serif text-xl text-bark mb-1">Hidratação Profunda</h3>
+            <p class="text-sm text-gray-500">12 receitas com mel, aloe vera e óleos naturais para pele sedosa.</p>
+          </div>
+        </div>
+
+        <!-- Card 2 -->
+        <div class="img-card rounded-2xl overflow-hidden shadow-md reveal group" style="transition-delay:0.1s">
+          <div class="overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1571781926291-c477ebfd024b?w=600&q=80" alt="Manchas" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-white p-5">
+            <div class="flex items-center gap-2 mb-2"><span class="text-xs bg-gold/20 text-bark px-2 py-0.5 rounded-full font-sans">Capítulo 2</span></div>
+            <h3 class="font-serif text-xl text-bark mb-1">Redução de Manchas</h3>
+            <p class="text-sm text-gray-500">8 tratamentos naturais com cúrcuma, limão e vitamina C.</p>
+          </div>
+        </div>
+
+        <!-- Card 3 -->
+        <div class="img-card rounded-2xl overflow-hidden shadow-md reveal group" style="transition-delay:0.2s">
+          <div class="overflow-hidden h-52">
+            <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?w=600&q=80" alt="Anti-idade" class="w-full h-full object-cover" />
+          </div>
+          <div class="bg-white p-5">
+            <div class="flex items-center gap-2 mb-2"><span class="text-xs bg-bark/10 text-bark px-2 py-0.5 rounded-full font-sans">Capítulo 3</span></div>
+            <h3 class="font-serif text-xl text-bark mb-1">Anti-Envelhecimento</h3>
+            <p class="text-sm text-gray-500">10 máscaras naturais que combatem rugas e linhas de expressão.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Extra bullets -->
+      <div class="mt-10 bg-white rounded-2xl p-8 shadow-sm reveal">
+        <h3 class="font-serif text-2xl text-bark mb-5 text-center">E muito mais incluído:</h3>
+        <div class="grid md:grid-cols-2 gap-3">
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">Rotina matinal e noturna passo a passo</span></div>
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">Guia de ingredientes por tipo de pele</span></div>
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">30 receitas com instruções detalhadas</span></div>
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">Dicas de conservação e duração das misturas</span></div>
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">Calendário de aplicações semanal</span></div>
+          <div class="flex items-start gap-3"><i class="fas fa-check-circle text-sage mt-0.5"></i><span class="text-sm text-gray-600">Bónus: dieta anti-inflamatória para a pele</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       DEPOIMENTOS
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 px-6 max-w-6xl mx-auto">
+    <div class="text-center mb-14 reveal">
+      <p class="text-sage text-xs uppercase tracking-widest mb-3">Resultados reais</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-bark">O que dizem as nossas clientes</h2>
+      <div class="flex justify-center gap-1 mt-4">
+        <i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i><i class="fas fa-star text-gold"></i>
+        <span class="text-sm text-gray-500 ml-2">4.9/5 (312 avaliações)</span>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <!-- T1 -->
+      <div class="tcard bg-white rounded-2xl p-6 shadow-sm border border-ivory reveal">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5 italic font-serif text-base">"Nunca tinha visto a minha pele tão saudável! Em apenas uma semana notei a diferença. As receitas são simples e os ingredientes fáceis de encontrar."</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1531746020798-e6953c6e8e04?w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="Maria L." />
+          <div>
+            <p class="font-medium text-bark text-sm">Maria L.</p>
+            <p class="text-gray-400 text-xs">Luanda, Angola</p>
+          </div>
+          <div class="ml-auto"><i class="fab fa-whatsapp text-sage text-xl"></i></div>
+        </div>
+      </div>
+
+      <!-- T2 -->
+      <div class="tcard bg-white rounded-2xl p-6 shadow-sm border border-ivory reveal" style="transition-delay:0.1s">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5 italic font-serif text-base">"As minhas manchas clararam muito! Gastava uma fortuna em cremes e nada. Com este e-book gastei pouco e vi resultado em dias. Recomendo a todas as minhas amigas!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="Ana C." />
+          <div>
+            <p class="font-medium text-bark text-sm">Ana C.</p>
+            <p class="text-gray-400 text-xs">Benguela, Angola</p>
+          </div>
+          <div class="ml-auto"><i class="fab fa-facebook text-sage text-xl"></i></div>
+        </div>
+      </div>
+
+      <!-- T3 -->
+      <div class="tcard bg-white rounded-2xl p-6 shadow-sm border border-ivory reveal" style="transition-delay:0.2s">
+        <div class="flex gap-1 mb-4"><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star text-gold text-sm"></i><i class="fas fa-star-half-alt text-gold text-sm"></i></div>
+        <p class="text-gray-600 text-sm leading-relaxed mb-5 italic font-serif text-base">"Comprei com receio mas valeu muito a pena! A minha pele ficou mais luminosa e as pessoas começaram a perguntar o segredo. Obrigada de coração!"</p>
+        <div class="flex items-center gap-3">
+          <img src="https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?w=100&q=80" class="w-10 h-10 rounded-full object-cover" alt="Sofia M." />
+          <div>
+            <p class="font-medium text-bark text-sm">Sofia M.</p>
+            <p class="text-gray-400 text-xs">Huambo, Angola</p>
+          </div>
+          <div class="ml-auto"><i class="fab fa-instagram text-sage text-xl"></i></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress bars -->
+    <div class="mt-12 bg-white rounded-2xl p-8 shadow-sm reveal">
+      <h3 class="font-serif text-xl text-bark mb-6 text-center">Resultados reportados pelas clientes</h3>
+      <div class="space-y-4">
+        <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-600">Pele mais hidratada</span><span class="text-moss font-medium">96%</span></div>
+          <div class="h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-sage to-moss rounded-full" style="width:96%;animation:progress 1.5s ease forwards;"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-600">Redução de manchas</span><span class="text-moss font-medium">88%</span></div>
+          <div class="h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-sage to-moss rounded-full" style="width:88%;animation:progress 1.8s ease forwards;"></div></div>
+        </div>
+        <div>
+          <div class="flex justify-between text-sm mb-1"><span class="text-gray-600">Pele mais luminosa</span><span class="text-moss font-medium">93%</span></div>
+          <div class="h-2 bg-gray-100 rounded-full overflow-hidden"><div class="h-full bg-gradient-to-r from-sage to-moss rounded-full" style="width:93%;animation:progress 2s ease forwards;"></div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════
+       OFERTA
+  ═══════════════════════════════════════════ -->
+  <section id="oferta" class="py-24 bg-gradient-to-b from-bark to-[#2e1e14] relative overflow-hidden">
+    <!-- Decorative circles -->
+    <div class="absolute top-0 right-0 w-96 h-96 bg-gold/5 rounded-full -translate-y-1/2 translate-x-1/2"></div>
+    <div class="absolute bottom-0 left-0 w-64 h-64 bg-sage/5 rounded-full translate-y-1/2 -translate-x-1/2"></div>
+
+    <div class="relative max-w-xl mx-auto px-6 text-center">
+      <!-- Book mockup -->
+      <div class="reveal mb-10">
+        <div class="inline-block relative">
+          <div class="w-48 h-64 bg-gradient-to-br from-sage to-moss rounded-lg shadow-2xl mx-auto flex items-center justify-center border-l-4 border-bark/30 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=400&q=80" class="absolute inset-0 w-full h-full object-cover opacity-40" />
+            <div class="relative z-10 text-white text-center p-4">
+              <i class="fas fa-leaf text-3xl text-gold mb-2"></i>
+              <p class="font-serif text-lg leading-tight">Pele<br/>Radiante</p>
+              <p class="text-xs text-white/60 mt-1">E-book</p>
             </div>
+          </div>
+          <!-- Sale badge -->
+          <div class="absolute -top-3 -right-3 w-14 h-14 bg-gold rounded-full flex items-center justify-center text-white text-xs font-bold shadow-lg">-30%</div>
         </div>
+      </div>
+
+      <p class="text-sage text-xs uppercase tracking-widest mb-3 reveal">Oferta por tempo limitado</p>
+      <h2 class="font-serif text-4xl md:text-5xl text-white mb-4 reveal">Aproveite Agora</h2>
+
+      <!-- Countdown -->
+      <div class="flex justify-center gap-4 mb-8 reveal">
+        <div class="timer-box rounded-xl px-5 py-3 text-center">
+          <span id="minutes" class="text-3xl font-bold text-gold font-sans block">07</span>
+          <span class="text-white/50 text-xs">min</span>
+        </div>
+        <div class="flex items-center text-gold text-2xl font-bold">:</div>
+        <div class="timer-box rounded-xl px-5 py-3 text-center">
+          <span id="seconds" class="text-3xl font-bold text-gold font-sans block">47</span>
+          <span class="text-white/50 text-xs">seg</span>
+        </div>
+      </div>
+
+      <!-- Price -->
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-8 mb-6 reveal">
+        <p class="text-white/50 text-sm mb-1">De <span class="price-old text-white/50">24.700 KZ</span></p>
+        <div class="flex items-center justify-center gap-2 mb-1">
+          <span class="text-white/60 text-lg">Apenas</span>
+        </div>
+        <p class="font-serif text-6xl text-gold mb-1">6.700 <span class="text-2xl">KZ</span></p>
+        <p class="text-white/40 text-xs">Pagamento único · Acesso imediato e vitalício</p>
+      </div>
+
+      <!-- Urgency bar -->
+      <div class="mb-8 reveal">
+        <p class="text-white/50 text-xs mb-2">⚡ Apenas 73% das unidades disponíveis neste preço</p>
+        <div class="h-2 bg-white/10 rounded-full overflow-hidden">
+          <div class="h-full bg-gradient-to-r from-gold to-amber-400 rounded-full progress-bar"></div>
+        </div>
+      </div>
+
+      <button onclick="location.href='https://pay.kuenha.com/33b80506-a515-4bc5-bf73-23db78687a60'"
+        class="btn-gold w-full py-5 rounded-2xl text-sm mb-4 animate-pulse2 shadow-2xl reveal">
+        <i class="fas fa-lock mr-2"></i>Comprar Agora com Segurança — 6.700 KZ
+      </button>
+
+      <!-- Guarantees -->
+      <div class="flex justify-center gap-6 text-white/40 text-xs reveal">
+        <span><i class="fas fa-shield-halved mr-1 text-sage"></i>Compra segura</span>
+        <span><i class="fas fa-bolt mr-1 text-sage"></i>Acesso imediato</span>
+        <span><i class="fas fa-redo mr-1 text-sage"></i>Suporte garantido</span>
+      </div>
     </div>
-</section>
+  </section>
 
-<section class="container my-5">
-    <h2 class="text-center">Perguntas Frequentes</h2>
-    <div class="accordion" id="faqAccordion">
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingOne">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Quais são os benefícios das receitas caseiras para a pele?
-                </button>
-            </h2>
-            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    As receitas caseiras oferecem hidratação natural, reduzem manchas e cicatrizes e evitam o uso de produtos químicos agressivos, proporcionando uma pele saudável e radiante.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingTwo">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    As receitas funcionam para todos os tipos de pele?
-                </button>
-            </h2>
-            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Sim! As receitas são formuladas para todos os tipos de pele. No entanto, é recomendado testar em uma pequena área antes de aplicar em todo o rosto.
-                </div>
-            </div>
-        </div>
-        <div class="accordion-item">
-            <h2 class="accordion-header" id="headingThree">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Quanto tempo leva para ver os resultados?
-                </button>
-            </h2>
-            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
-                <div class="accordion-body">
-                    Os resultados variam, mas muitas pessoas relatam uma melhoria visível na pele após uma semana de uso regular.
-                </div>
-            </div>
-        </div>
+  <!-- ═══════════════════════════════════════════
+       FAQ
+  ═══════════════════════════════════════════ -->
+  <section class="py-24 px-6 max-w-3xl mx-auto">
+    <div class="text-center mb-12 reveal">
+      <p class="text-sage text-xs uppercase tracking-widest mb-3">Dúvidas</p>
+      <h2 class="font-serif text-4xl text-bark">Perguntas Frequentes</h2>
     </div>
-</section>
 
-<section class="container my-5">
-    <h2 class="text-center">Veja nosso vídeo explicativo</h2>
-    <div class="d-flex justify-content-center" style="flex-direction:column;" >
-        <iframe width="560" height="315" src="InShot_20240804_132636165.mp4" title="Vídeo Explicativo" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-    <button class="btn-cta">Adquira com Desconto</button>
+    <div class="space-y-3 reveal">
+      <!-- FAQ items -->
+      <div class="bg-white rounded-2xl border border-ivory overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between">
+          <span class="font-serif text-bark text-lg">Quais são os benefícios das receitas caseiras?</span>
+          <i class="fas fa-plus faq-icon text-sage"></i>
+        </button>
+        <div class="faq-content px-6">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">As receitas oferecem hidratação natural profunda, ajudam a clarear manchas e cicatrizes, e evitam o contacto com químicos agressivos. Os ingredientes são acessíveis, económicos e eficazes para todos os tipos de pele.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-ivory overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between">
+          <span class="font-serif text-bark text-lg">Funciona para todos os tipos de pele?</span>
+          <i class="fas fa-plus faq-icon text-sage"></i>
+        </button>
+        <div class="faq-content px-6">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">Sim! O e-book inclui um guia completo de adaptação por tipo de pele (seca, oleosa, mista e sensível). Cada receita indica para qual tipo de pele é mais indicada e como ajustar os ingredientes.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-ivory overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between">
+          <span class="font-serif text-bark text-lg">Em quanto tempo vejo resultados?</span>
+          <i class="fas fa-plus faq-icon text-sage"></i>
+        </button>
+        <div class="faq-content px-6">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">A maioria das clientes reporta melhorias visíveis ao fim de 5 a 7 dias de uso regular. Para resultados duradouros, recomendamos seguir a rotina semanal incluída no e-book durante pelo menos 4 semanas.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-ivory overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between">
+          <span class="font-serif text-bark text-lg">Como recebo o e-book após a compra?</span>
+          <i class="fas fa-plus faq-icon text-sage"></i>
+        </button>
+        <div class="faq-content px-6">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">Após a confirmação do pagamento receberá o acesso imediato ao e-book em formato PDF, directamente no seu e-mail. Pode guardar no telemóvel, tablet ou computador e consultar a qualquer momento, mesmo sem internet.</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-2xl border border-ivory overflow-hidden">
+        <button onclick="toggleFaq(this)" class="w-full text-left px-6 py-5 flex items-center justify-between">
+          <span class="font-serif text-bark text-lg">Os ingredientes são fáceis de encontrar?</span>
+          <i class="fas fa-plus faq-icon text-sage"></i>
+        </button>
+        <div class="faq-content px-6">
+          <p class="text-gray-500 text-sm pb-5 leading-relaxed">Sim! Todas as receitas utilizam ingredientes simples e acessíveis: mel, limão, aloe vera, óleo de coco, aveia, açúcar, entre outros. Tudo disponível em mercados e supermercados locais a preços acessíveis.</p>
+        </div>
+      </div>
     </div>
-</section>
+  </section>
 
-<footer>
-    <p>&copy; 2024 Receitas Caseiras para Pele - Todos os Direitos Reservados</p>
-</footer>
+  <!-- ═══════════════════════════════════════════
+       FINAL CTA
+  ═══════════════════════════════════════════ -->
+  <section class="py-20 px-6 text-center bg-ivory border-t border-ivory reveal">
+    <div class="max-w-xl mx-auto">
+      <i class="fas fa-leaf text-sage text-3xl mb-5"></i>
+      <h2 class="font-serif text-4xl text-bark mb-4">Comece hoje a sua<br/><em class="text-gold">transformação</em></h2>
+      <p class="text-gray-500 text-sm mb-8 leading-relaxed">Junte-se a mais de 2.400 mulheres que já descobriram o poder da natureza para uma pele radiante.</p>
+      <button onclick="location.href='https://pay.kuenha.com/33b80506-a515-4bc5-bf73-23db78687a60'"
+        class="btn-gold px-10 py-5 rounded-full text-sm shadow-xl">
+        <i class="fas fa-bolt mr-2"></i>Quero o Meu E-book — 6.700 KZ
+      </button>
+    </div>
+  </section>
 
-<!-- Bootstrap JS -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer class="bg-bark text-white/40 text-center py-8 text-xs font-sans">
+    <div class="mb-3">
+      <span class="font-serif text-gold text-lg italic">Pele Radiante</span>
+    </div>
+    <p>&copy; 2024 Receitas Caseiras para Pele · Todos os Direitos Reservados</p>
+    <p class="mt-2">Feito com <i class="fas fa-heart text-rose-400 mx-0.5"></i> em Angola</p>
+  </footer>
 
-<!-- Contador Regressivo -->
-<script>
-    let minutes = 7;
-    let seconds = 47;
+  <script>
+    // ─── Countdown ───────────────────────────────
+    let minutes = 7, seconds = 47;
+    const mEl = document.getElementById('minutes');
+    const sEl = document.getElementById('seconds');
 
-    const countdown = setInterval(() => {
-        if (seconds === 0) {
-            if (minutes === 0) {
-                clearInterval(countdown);
-                document.getElementById('countdown').innerHTML = '<h3>Oferta Encerrada!</h3>';
-                return;
-            }
-            minutes--;
-            seconds = 59;
-        } else {
-            seconds--;
+    const timer = setInterval(() => {
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(timer);
+          document.getElementById('oferta').querySelector('.flex.justify-center.gap-4').innerHTML =
+            '<p class="text-red-400 font-serif text-2xl">⏰ Oferta Encerrada!</p>';
+          return;
         }
-        
-        // Atualizando os valores no DOM
-        document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
-        document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
+        minutes--; seconds = 59;
+      } else { seconds--; }
+      mEl.textContent = String(minutes).padStart(2,'0');
+      sEl.textContent = String(seconds).padStart(2,'0');
     }, 1000);
-const button = document.querySelectorAll('button')
-button.forEach(botao=>{
-botao.addEventListener('click',function() {
-location.href='https://pay.kuenha.com/33b80506-a515-4bc5-bf73-23db78687a60' 
-}) 
-}) 
-</script>
 
+    // ─── Sticky nav ──────────────────────────────
+    const nav = document.getElementById('sticky-nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('show', window.scrollY > 400);
+    });
+
+    // ─── Scroll reveal ───────────────────────────
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // ─── FAQ accordion ───────────────────────────
+    function toggleFaq(btn) {
+      const content = btn.nextElementSibling;
+      const icon = btn.querySelector('.faq-icon');
+      const isOpen = content.classList.contains('open');
+
+      document.querySelectorAll('.faq-content').forEach(c => c.classList.remove('open'));
+      document.querySelectorAll('.faq-icon').forEach(i => i.classList.remove('open'));
+
+      if (!isOpen) {
+        content.classList.add('open');
+        icon.classList.add('open');
+      }
+    }
+  </script>
 </body>
 </html>
